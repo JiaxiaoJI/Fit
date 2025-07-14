@@ -2,73 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Ji's Fitting Room</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f7f7f7;
-            text-align: center;
-            padding: 20px;
-        }
-        canvas {
-            border: 1px solid #ccc;
-            background-color: white;
-        }
-        .upload-section {
-            margin-bottom: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ji's Fitting Room</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Ji's Fitting Room</h1>
-    <p>默认模特已加载，只需上传PNG格式的衣服图层（背景透明），或背景图（可选）</p>
-
-    <div class="upload-section">
-        <input type="file" id="backgroundInput" accept="image/*">
-        <label>上传背景图（可选）</label>
-    </div>
-    <div class="upload-section">
-        <input type="file" id="clothingInput" accept="image/png">
-        <label>上传衣服图（PNG 透明）</label>
-    </div>
-    <canvas id="fittingCanvas" width="400" height="700"></canvas><br>
-    <button onclick="saveCanvas()">保存搭配图</button>
-
-    <script>
-        const canvas = document.getElementById("fittingCanvas");
-        const ctx = canvas.getContext("2d");
-
-        const modelImg = new Image();
-        modelImg.src = "./model.png";
-        modelImg.onload = () => {
-            ctx.drawImage(modelImg, 0, 0, canvas.width, canvas.height);
-        };
-
-        document.getElementById("backgroundInput").addEventListener("change", function(e) {
-            const bgImg = new Image();
-            bgImg.onload = () => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-                ctx.drawImage(modelImg, 0, 0, canvas.width, canvas.height);
-            };
-            bgImg.src = URL.createObjectURL(e.target.files[0]);
-        });
-
-        document.getElementById("clothingInput").addEventListener("change", function(e) {
-            const clothesImg = new Image();
-            clothesImg.onload = () => {
-                ctx.drawImage(clothesImg, 0, 0, canvas.width, canvas.height);
-            };
-            clothesImg.src = URL.createObjectURL(e.target.files[0]);
-        });
-
-        function saveCanvas() {
-            const link = document.createElement("a");
-            link.download = "ji-look.png";
-            link.href = canvas.toDataURL();
-            link.click();
-        }
-    </script>
+  <h1>Ji's Fitting Room</h1>
+  <div id="controls">
+    <label>Upload Clothing Image (PNG or JPG): <input type="file" id="clothingUpload" accept="image/png, image/jpeg" /></label>
+    <label>Upload Background (Optional): <input type="file" id="backgroundUpload" accept="image/*" /></label>
+    <button id="saveLook">Save Look</button>
+  </div>
+  <div id="canvasContainer">
+    <canvas id="tryOnCanvas" width="768" height="1210"></canvas>
+  </div>
+  <script src="main.js"></script>
 </body>
 </html>
