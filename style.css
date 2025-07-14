@@ -1,0 +1,29 @@
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+    color: #333;
+    text-align: center;
+}
+header {
+    padding: 1rem;
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+.upload-section, .save-section {
+    margin: 1rem;
+}
+canvas {
+    margin-top: 1rem;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+#gallery {
+    padding: 1rem;
+}
+#savedGallery img {
+    width: 100px;
+    margin: 5px;
+}

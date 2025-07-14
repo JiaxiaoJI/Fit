@@ -1,0 +1,10 @@
+
+{
+    "name": "Ji’s Fitting Room",
+    "short_name": "FittingRoom",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#f7f7f7",
+    "icons": []
+}
