@@ -1,35 +1,37 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ji’s Fitting Room</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
+  <title>Ji's Fitting Room</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin: 40px; background: #f5f5f5; }
+    #model-container { position: relative; display: inline-block; }
+    #model, #clothes { position: absolute; top: 0; left: 0; max-width: 100%; height: auto; }
+    input[type="file"] { margin: 20px; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Ji’s Fitting Room</h1>
-        <p>Virtual Try-On · Outfit Recorder</p>
-    </header>
-    <main>
-        <div class="upload-section">
-            <label>Upload Clothing Image: <input type="file" id="clothingInput" accept="image/*"></label>
-            <label>Upload Background Image: <input type="file" id="backgroundInput" accept="image/*"></label>
-        </div>
-        <div class="canvas-section">
-            <canvas id="previewCanvas" width="400" height="600"></canvas>
-        </div>
-        <div class="save-section">
-            <input type="text" id="tagInput" placeholder="Add tag or note">
-            <button onclick="saveOutfit()">Save Outfit</button>
-        </div>
-        <section id="gallery">
-            <h2>Saved Looks</h2>
-            <div id="savedGallery"></div>
-        </section>
-    </main>
-    <script src="main.js"></script>
+  <h1>Ji's Fitting Room</h1>
+  <p>Upload a transparent PNG clothing image to try it on</p>
+  <input type="file" id="upload" accept="image/*" />
+  <div id="model-container">
+    <img id="model" src="model.png" alt="Model">
+    <img id="clothes" src="" alt="Clothes" style="display:none;">
+  </div>
+  <script>
+    const upload = document.getElementById('upload');
+    const clothesImg = document.getElementById('clothes');
+    upload.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          clothesImg.src = e.target.result;
+          clothesImg.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 </body>
 </html>
